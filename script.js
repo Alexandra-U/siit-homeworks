@@ -80,12 +80,18 @@ function printPattern(num) {
     let list1 = [0, 1, 0, 1];
     let list2 = [1, 0, 1, 0];
 
-    console.log([0, 1, 0, 1]);
-    console.log([1, 0, 1, 0]);
-    console.log([0, 1, 0, 1]);
-    console.log([1, 0, 1, 0]);
-        
-    
+    for (let i = 0; i < list1.length; i++) {
+
+        for (let j = 0; j < list2.length; j++) {
+
+        }
+            console.log([0, 1, 0, 1]);
+            console.log([1, 0, 1, 0]);
+            console.log([0, 1, 0, 1]);
+            console.log([1, 0, 1, 0]);
+break;
+    }
+  
 }
 printPattern();
 
