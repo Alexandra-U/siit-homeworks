@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Form Demo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <form action="">
+    <p><input type="text" name="name" placeholder="Name" class="js-required"></p>
+
+    <p><textarea name="bio" cols="30" rows="10" class="js-required"></textarea></p>
+    <p>
+      Gender:
+      <br>
+      <label for="gender"><input type="radio" name="gender" value="m">M</label>
+      <br>
+      <label for="gender"><input type="radio" name="gender" value="f">F</label>
+    </p>
+    <p>
+      <select name="anything" class="js-required">
+        <option value="">Please select something</option>
+        <option value="1">Option #1</option>
+        <option value="2">Option #2</option>
+        <optgroup label="Titlu de optgroup">
+          <option value="3">Option #3</option>
+          <option value="4" disabled>Option #4</option>
+          <option value="5">Option #5</option>
+        </optgroup>
+      </select>
+    </p>
+    
+    <p>
+      <button type="submit">Submit</button>
+    </p>
+  </form>
+
+  <script src="form.js"></script>
+</body>
+</html>

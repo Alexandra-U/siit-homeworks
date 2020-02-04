@@ -1,0 +1,49 @@
+img {
+  width: 350px;
+  grid-area: 1 / 2 / 2 / 4;
+  margin: 200px auto;
+  padding-left: 40px;
+  
+}
+
+button, span {
+  font-size: 2em;
+  padding: 0 1em;
+}
+
+.hidden {
+  display: none;
+}
+
+.success-message {
+  border: 1px solid #0c0;
+  background-color: #84f57d;
+  color: #0c0;
+  padding: 5px;
+  text-align: center;
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+form {
+  padding: 20px;
+  margin: 100px auto;
+  border: 1px solid black;
+  width: 650px;
+  box-sizing: border-box;
+  grid-area: 1 / 2 / 2 / 3;
+
+
+}
+
+body {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
