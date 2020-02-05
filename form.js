@@ -12,149 +12,156 @@ document.querySelector('form').addEventListener('submit', handleSubmit);
   comportamentul implicit (reincarcarea paginii).
 */
 function handleSubmit(e) {
-  const reqFields = document.querySelectorAll('.js-required');
-  const radios = document.querySelectorAll('[name=gender]');
-  const select = document.querySelector('select');
+    const reqFields = document.querySelectorAll('.js-required');
+    const radios = document.querySelectorAll('[name=gender]');
+    const select = document.querySelector('select');
 
-  //fielduri in care se completeaza
-  for(let i = 0; i < reqFields.length; i++) {
-    const field = reqFields[i];
+    //fielduri in care se completeaza
+    for (let i = 0; i < reqFields.length; i++) {
+        const field = reqFields[i];
 
-    // Nu s-a completat un field de tip text
-    if(field.value === '') {
-      const errorMessage = showErrorMessage('Please fill in the field named ' + field.name + '!');
+        // Nu s-a completat un field de tip text
+        if (field.value === '') {
+            const errorMessage = showErrorMessage('Please fill in the field named ' + field.name + '!');
 
-      console.warn('The field named', field.name, "is empty");
-      field.style.border = '1px solid #c00';
-      field.addEventListener(
-        'change', 
-        () => {
-          removeErrorState(field);
-          hideErrorMessage(errorMessage);
-        }, 
-        { once: true }
-      );
-      e.preventDefault();
+            console.warn('The field named', field.name, "is empty");
+            field.style.border = '1px solid #c00';
+            field.addEventListener(
+                'change',
+                () => {
+                    removeErrorState(field);
+                    hideErrorMessage(errorMessage);
+                }, {
+                    once: true
+                }
+            );
+            e.preventDefault();
+        }
     }
-  }
-  
-  //radios
 
-  if(!radios[0].checked && !radios[1].checked) {
-    const parent = radios[0].parentElement.parentElement;
-    parent.style.border = '1px solid #c00';
-    
-    const errorMessage = showErrorMessage('Please select a gender!');
+    //radios
 
-    radios[0].addEventListener('change', () => {
-      removeErrorState(parent);
-      hideErrorMessage(errorMessage);
-    });
-    radios[1].addEventListener('change', () => {
-      removeErrorState(parent);
-      hideErrorMessage(errorMessage);
-    });
-    console.warn('The gender is missing');
-    e.preventDefault();
-  }
+    if (!radios[0].checked && !radios[1].checked) {
+        const parent = radios[0].parentElement.parentElement;
+        parent.style.border = '1px solid #c00';
 
-  console.log(reqFields);
+        const errorMessage = showErrorMessage('Please select a gender!');
+
+        radios[0].addEventListener('change', () => {
+            removeErrorState(parent);
+            hideErrorMessage(errorMessage);
+        });
+        radios[1].addEventListener('change', () => {
+            removeErrorState(parent);
+            hideErrorMessage(errorMessage);
+        });
+        console.warn('The gender is missing');
+        e.preventDefault();
+    }
+
+    console.log(reqFields);
 }
 
 //remove error when fields are filled
 
 function removeErrorState(elem) {
-  elem.style.border = '1px solid #afafaf'
+    elem.style.border = '1px solid #afafaf'
 }
 
 function hideErrorMessage(messageRef) {
-  messageRef.remove();
+    messageRef.remove();
 }
 
 //error message
 
 function showErrorMessage(message) {
-  const i = document.createElement('i');
-  i.classList.add('fas','fa-exclamation-triangle');
-  
-  const p = document.createElement('p');
-  p.style.border = '1px solid #c00';
-  p.style.backgroundColor = '#f5847d';
-  p.style.color = '#c00';
-  p.style.padding = '5px';
-  
-  p.innerHTML = message;
-  
-  const form = document.querySelector('form');
-  
-  //form.appendChild(p);
-  p.prepend(i);
-  form.prepend(p);
-  
+    const i = document.createElement('i');
+    i.classList.add('fas', 'fa-exclamation-triangle');
 
-  return p;
+    const p = document.createElement('p');
+    p.style.border = '1px solid #c00';
+    p.style.backgroundColor = '#f5847d';
+    p.style.color = '#c00';
+    p.style.padding = '5px';
+
+    p.innerHTML = message;
+
+    const form = document.querySelector('form');
+
+    //form.appendChild(p);
+    p.prepend(i);
+    form.prepend(p);
+
+
+    return p;
 }
 
 //success message
 
 function showSuccessMessage() {
-  if(document.location.search === '') {
-    return;
-  }
+    if (document.location.search === '') {
+        return;
+    }
 
-  const p = document.createElement("p");
-  const i = document.createElement("i");
-  p.classList.add('success-message');
-  i.classList.add('fas','fa-check');
-  
+    const p = document.createElement("p");
+    const i = document.createElement("i");
+    p.classList.add('success-message');
+    i.classList.add('fas', 'fa-check');
 
-  // let user = '';
-  // for (const pair of document.location.search.split('&')) {
-  //   if(pair.includes('name=')) {
-  //     user = pair.split('=')[1];
-  //     break;
-  //   }
-  // }
+    // short version
 
-  // p.innerHTML = "Thanks for contacting " + user;
+    // let user = '';
+    // for (const pair of document.location.search.split('&')) {
+    //   if(pair.includes('name=')) {
+    //     user = pair.split('=')[1];
+    //     break;
+    //   }
+    // }
+    // p.innerHTML = "Thanks for contacting " + user;
 
-  const pairs = window.location.search.split("&");
-  const query = window.location.search.substring(19);
-  let user = "";
-  for(let i = 0; i < pairs.length; i++) {
-    const pair = pairs[i];
-    const fields = pair.split("=");
-    if(pair.includes("name=")) {
-      user = fields[1];  
-    } 
-   
-    console.log(fields[0], "=", fields[1]);
-  }
-  p.innerHTML = "Thanks for contacting us " + user;
+    const pairs = window.location.search.split("&");
+    let user = "";
+    for (let i = 0; i < pairs.length; i++) {
+        const pair = pairs[i];
+        const fields = pair.split("=");
 
-  const form = document.querySelector("form");
-  form.prepend(p);
-  p.prepend(i);
+        if (pair.includes("name=")) {
+            user = fields[1];
+        }
+        console.log(fields[0], "=", fields[1]);
+    }
+    p.innerHTML = "Thanks for contacting us " + user;
 
-  setTimeout(hideSuccessMessage, 3000);
+    // no question mark
+
+    const url = window.location.href;
+    console.log(url.substr(url.lastIndexOf("?") + 1)); //So I did it ish, n-am mai putut sa integrez ce am facut aici in ce aveam 
+
+
+
+    const form = document.querySelector("form");
+    form.prepend(p);
+    p.prepend(i);
+
+    setTimeout(hideSuccessMessage, 3000);
 }
 
 //hide sucess messgae
 
 function hideSuccessMessage() {
-  // const messageContainer = document.querySelector('.success-message'); //.remove();
-  // let opacity = 1;
-  // const interval = setInterval(function() {
-  //   opacity = (opacity - 0.05).toFixed(2);
-  //   messageContainer.style.opacity = opacity;
-  //   console.log(opacity);
-    
-  //   if(opacity <= 0) {
-  //     //console.log('aici', opacity);
-  //     clearInterval(interval);
-  //   }
-  // }, 50)
-  document.querySelector('.success-message').classList.add('fade-out');
+    // const messageContainer = document.querySelector('.success-message'); //.remove();
+    // let opacity = 1;
+    // const interval = setInterval(function() {
+    //   opacity = (opacity - 0.05).toFixed(2);
+    //   messageContainer.style.opacity = opacity;
+    //   console.log(opacity);
+
+    //   if(opacity <= 0) {
+    //     //console.log('aici', opacity);
+    //     clearInterval(interval);
+    //   }
+    // }, 50)
+    document.querySelector('.success-message').classList.add('fade-out');
 }
 
 // Insert image using only JS
