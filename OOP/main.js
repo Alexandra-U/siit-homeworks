@@ -97,5 +97,4 @@ function addGame(game) {
 }
 
 
-const details = new DetailView();
-details.displayPost();
+const details = new GetData();
