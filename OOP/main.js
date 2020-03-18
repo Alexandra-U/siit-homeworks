@@ -96,36 +96,6 @@ function addGame(game) {
     });
 }
 
-    
-
-// display data details
-
-class DetailView {
-    constructor() {
-        const model = new GetData();
-
-        const queryParams = location.search.find(param => param.includes('postId=')).split('=')[1];;
-        
-
-        this.post = model.findById(postId);
-    }
-
-    async dislayPost() {
-        const article = document.querySelector(".js-article");
-        article.append(await this.createHtml());
-    }
-
-    async createHtml() {
-        const post = await this.post;
-
-        const title = document.createElement('h2');
-        title.innerHTML = post.title;
-
-        const body = document.createElement('section');
-        body.append(title);
-
-    }
-}
 
 const details = new DetailView();
 details.displayPost();
