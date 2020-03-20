@@ -1,37 +1,37 @@
 class DetailView {
     constructor() {
          this.model = new GetData();
-        //  document.querySelector('.js-article').addEventListener('click', this.handleDeleteClick.bind(this))
+         displayGames(games);
+         this.displayList();
     }
 
-    async displayList() {
-        const games = await this.model.getAll();
-        const html = this.createHtml();
-        document.querySelector('.js-article').append(html);
-    }
+     async displayList() {
+            const games = await this.model.getAll();
+            const html = this.createHtml();
+            document.querySelector('.js-article').append(html);
+            
+        
 
-    emptyMovieList() {
-        document.querySelector('.js-article').innerHTML = '';
-    }
-
-    createHtml(games) {
-        const fragment = document.createDocumentFragment();
-
+    
         for(const game of games) {
-            const article = document.createElement('article');
-            const poster = document.createElement('img');
-            const title = document.createElement('h2');
-            const deleteBtn = document.createElement('button');
+            const h1  = document.createElement("h1");
+            h1.href = url + game._id;
+            h1.innerHTML = game.title;
 
-            poster.src = game.imageUrl;
-            title.innerHTML = game.title;
-            // deleteBtn.innerHTML = 'Delete';
-            // deleteBtn.setAttribute('data-delete-movie', game._id);
+            document.body.append(h1);
+            document.body.append(document.createElement("p"));
 
-            article.append(poster, title) //deleteBtn);
-            fragment.append(article);
+            const p = document.createElement("p");
+            document.body.append(p);
+            p.innerHTML = game.description;
+
+            const img = document.createElement("img");
+            img.src = game.imageUrl;
+            document.body.append(img);
+            document.body.append(document.createElement("p"))    
         }
-
-        return fragment;
     }
 }
+    
+
+    
