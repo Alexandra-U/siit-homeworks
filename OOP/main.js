@@ -46,36 +46,39 @@ view.displayList();
 
 class AddEventListener {
     constructor() {
-         document.querySelector(".js-delete").addEventListener("click", handleClick); 
+         document.querySelector(".js-delete").addEventListener("click", deleteGame); 
          document.querySelector(".js-create").addEventListener("click", addGame);  
          document.querySelector(".js-update").addEventListener("click", updateGame); 
         }
     }
     const event = new AddEventListener();
 
-    function handleClick(e) {
-        apiUrl = "https://games-world.herokuapp.com/games";
-        fetch(`${apiUrl}/${e}`, {
+    // delete 
+
+    function deleteGame(id) {
+        fetch(`${apiUrl}/${id}`, {
             method: 'DELETE'
-        })
-        .then(res => res.json())
-        .then(console.log("Deleted"));
+        }).then(res => res.json()).then(jsonResp => console.log(jsonResp));
 
         }
 
 // edit data/ update
 
 
-function updateGame() {
-    fetch("https://games-world.herokuapp.com/games", {
+function updateGame(id) {
+    
+    fetch(`${this.apiUrl}/${id}`, {
         method: 'PATCH',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            "Content-Type": "application/json"
         },
-        body: 'I love games'
-    })
-    .then(res => res.json())
-    .then(console.log)
+        body: JSON.stringify({
+            "title": "Super Mario", 
+            "releaseDtae": "13339229600", 
+            "genre": "Indie",
+        })
+        
+    }).then(res => res.json()).then(jsonResp => console.log(jsonResp))
 }
 
 
@@ -83,17 +86,15 @@ function updateGame() {
 // add data
 
 function addGame(game) {
-    fetch("https://games-world.herokuapp.com/games", {
+    fetch(this.apiUrl, {
         method: "POST",
-        data: game
-    });
-
-    console.log({
-        "title": "Super Bunny Man", 
-        "releaseDtae": "13339229600", 
-        "genre": "Action, Indie",
-        "publisher": "Catobyte",
-    });
+        body: JSON.stringify({
+            "title": "Super Bunny Man", 
+            "releaseDtae": "13339229600", 
+            "genre": "Action, Indie",
+            "publisher": "Catobyte"
+            })
+    }). then(res => res.json()).then(jsonResp => console.log(jsonResp))
 }
 
 
