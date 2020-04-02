@@ -23,7 +23,6 @@ function MovieDetails() {
         return (
             <>
                 <h1>{ movie.Title }({ movie.Year }) &nbsp; &nbsp; &nbsp; &#11088;{movie.imdbRating}/10</h1>
-                <h5 style={{position: 'absolute', right: 930}}>{movie.imdbVotes}</h5>
                 <h6>{movie.Rated} &#x0007C; {movie.Runtime} &#x0007C; {movie.Genre} &#x0007C; {movie.Released}({movie.Country})</h6>
                 <img src={ movie.Poster } alt="Movie Poster" />
                 <p>{movie.Plot}</p>
